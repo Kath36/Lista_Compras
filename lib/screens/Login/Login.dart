@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:Lista_Compras/screens/Vista.dart';
+import 'package:Lista_Compras/screens/Compras/Vista.dart';
 
 class LoginPage extends StatefulWidget {
   @override

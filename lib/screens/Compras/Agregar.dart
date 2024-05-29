@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AddItemPage extends StatefulWidget {
   final Function(Map<String, dynamic>) onAddItem;
@@ -37,8 +38,8 @@ class _AddItemPageState extends State<AddItemPage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(''),            
-             fit: BoxFit.cover, 
+            image: NetworkImage('https://example.com/background_image.jpg'), // Reemplaza con la URL correcta de la imagen
+            fit: BoxFit.cover,
           ),
         ),
         child: SingleChildScrollView(
@@ -78,6 +79,7 @@ class _AddItemPageState extends State<AddItemPage> {
                           border: OutlineInputBorder(),
                         ),
                         keyboardType: TextInputType.number,
+                        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       ),
                       SizedBox(height: 20),
                       TextField(

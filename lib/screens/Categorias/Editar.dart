@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 
-class EditItemPage extends StatelessWidget {
-  final Map<String, dynamic> item;
+class EditCategoryPage extends StatelessWidget {
+  final Map<String, dynamic> category;
   final int index;
   final Function(Map<String, dynamic>, int) onEdit;
-  final TextEditingController _productController;
-  final TextEditingController _priceController;
-  final TextEditingController _categoryController;
+  final TextEditingController _nameController;
+  final TextEditingController _descriptionController;
 
-  EditItemPage({
-    required this.item,
+  EditCategoryPage({
+    required this.category,
     required this.index,
     required this.onEdit,
-  })  : _productController = TextEditingController(text: item['name']),
-        _priceController = TextEditingController(text: item['price']),
-        _categoryController = TextEditingController(text: item['category']);
+  })  : _nameController = TextEditingController(text: category['name']),
+        _descriptionController =
+            TextEditingController(text: category['description']);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Editar Producto',
+          'Editar Categoría',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.black,
@@ -49,35 +48,25 @@ class EditItemPage extends StatelessWidget {
                 child: Column(
                   children: [
                     TextField(
-                      controller: _productController,
+                      controller: _nameController,
                       decoration: InputDecoration(
-                        labelText: 'Nombre del Producto',
+                        labelText: 'Nombre de la Categoría',
                         border: OutlineInputBorder(),
                       ),
                     ),
                     SizedBox(height: 20),
                     TextField(
-                      controller: _priceController,
+                      controller: _descriptionController,
                       decoration: InputDecoration(
-                        labelText: 'Precio del Producto',
-                        border: OutlineInputBorder(),
-                      ),
-                      keyboardType: TextInputType.number,
-                    ),
-                    SizedBox(height: 20),
-                    TextField(
-                      controller: _categoryController,
-                      decoration: InputDecoration(
-                        labelText: 'Categoría del Producto',
+                        labelText: 'Descripción de la Categoría',
                         border: OutlineInputBorder(),
                       ),
                     ),
                     SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
-                        if (_productController.text.isEmpty ||
-                            _priceController.text.isEmpty ||
-                            _categoryController.text.isEmpty) {
+                        if (_nameController.text.isEmpty ||
+                            _descriptionController.text.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -86,12 +75,11 @@ class EditItemPage extends StatelessWidget {
                             ),
                           );
                         } else {
-                          Map<String, dynamic> editedItem = {
-                            'name': _productController.text,
-                            'price': _priceController.text,
-                            'category': _categoryController.text,
+                          Map<String, dynamic> editedCategory = {
+                            'name': _nameController.text,
+                            'description': _descriptionController.text,
                           };
-                          onEdit(editedItem, index);
+                          onEdit(editedCategory, index);
                           Navigator.pop(context);
                         }
                       },
