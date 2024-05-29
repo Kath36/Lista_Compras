@@ -1,5 +1,5 @@
-import 'package:Lista_Compras/screens/Vista.dart';
 import 'package:flutter/material.dart';
+import 'package:Lista_Compras/screens/Login/Login.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -13,12 +13,20 @@ class MyApp extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Lista de compras',
-          style: TextStyle(color: Colors.white), 
+          'Lista de Compras',
+          style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.black,
       ),
-      body: ViewItemsPage(), 
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/background_image.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: LoginPage(),
+      ),
     );
   }
 }

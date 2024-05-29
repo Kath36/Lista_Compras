@@ -1,7 +1,8 @@
-import 'package:Lista_Compras/screens/Agregar.dart';
-import 'package:Lista_Compras/screens/Editar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:Lista_Compras/screens/Login/Login.dart';
+import 'agregar.dart';
+import 'editar.dart';
 
 class ViewItemsPage extends StatefulWidget {
   @override
@@ -15,6 +16,7 @@ class _ViewItemsPageState extends State<ViewItemsPage> {
   void _removeItem(int index) {
     setState(() {
       items.removeAt(index);
+      _selectedIndex = null; // Deselect item after removal
     });
   }
 
@@ -47,13 +49,35 @@ class _ViewItemsPageState extends State<ViewItemsPage> {
           ),
         ),
       );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Por favor seleccione un artículo para editar.'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
+  }
+
+  void _logout(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
+      appBar: AppBar(
+        title: Text('Lista de Compras'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () => _logout(context),
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           Container(
@@ -72,15 +96,14 @@ class _ViewItemsPageState extends State<ViewItemsPage> {
           Column(
             children: [
               if (items.isEmpty)
-               Container(
-  color: Colors.white, 
-  padding: EdgeInsets.all(8.0),
-  child: Text(
-    'No hay compras pendientes',
-    style: TextStyle(fontSize: 18.0, fontFamily: 'Roboto', fontWeight: FontWeight.bold, color: Colors.black),
-  ),
-),
-
+                Container(
+                  color: Colors.white, 
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'No hay compras pendientes',
+                    style: TextStyle(fontSize: 18.0, fontFamily: 'Roboto', fontWeight: FontWeight.bold, color: Colors.black),
+                  ),
+                ),
               Expanded(
                 child: ListView.builder(
                   itemCount: items.length,
@@ -129,9 +152,10 @@ class _ViewItemsPageState extends State<ViewItemsPage> {
                     ElevatedButton.icon(
                       onPressed: () => _navigateToAddItemPage(context),
                       icon: Icon(Icons.add),
-                      label: Text('Agregar',
-                                        style: TextStyle(color: Colors.white), 
-),
+                      label: Text(
+                        'Agregar',
+                        style: TextStyle(color: Colors.white), 
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blueAccent,
                       ),
@@ -139,9 +163,10 @@ class _ViewItemsPageState extends State<ViewItemsPage> {
                     ElevatedButton.icon(
                       onPressed: () => _navigateToEditItemPage(context),
                       icon: Icon(Icons.edit), 
-                      label: Text('Editar',
-                                        style: TextStyle(color: Colors.white), 
-),
+                      label: Text(
+                        'Editar',
+                        style: TextStyle(color: Colors.white), 
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blueAccent,
                       ),

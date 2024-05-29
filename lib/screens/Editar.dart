@@ -8,8 +8,11 @@ class EditItemPage extends StatelessWidget {
   final TextEditingController _priceController;
   final TextEditingController _categoryController;
 
-  EditItemPage({required this.item, required this.index, required this.onEdit})
-      : _productController = TextEditingController(text: item['name']),
+  EditItemPage({
+    required this.item,
+    required this.index,
+    required this.onEdit,
+  })  : _productController = TextEditingController(text: item['name']),
         _priceController = TextEditingController(text: item['price']),
         _categoryController = TextEditingController(text: item['category']);
 
@@ -17,9 +20,10 @@ class EditItemPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Editar Producto',
-                  style: TextStyle(color: Colors.white), 
-),
+        title: Text(
+          'Editar Producto',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
@@ -76,7 +80,8 @@ class EditItemPage extends StatelessWidget {
                             _categoryController.text.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text('Por favor completa todos los campos.'),
+                              content: Text(
+                                  'Por favor completa todos los campos.'),
                               backgroundColor: Colors.red,
                             ),
                           );
@@ -91,14 +96,15 @@ class EditItemPage extends StatelessWidget {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue, 
+                        backgroundColor: Colors.blue,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: Text('Guardar',
-                                        style: TextStyle(color: Colors.white), 
-),
+                      child: Text(
+                        'Guardar',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                     SizedBox(height: 20),
                     ElevatedButton(
@@ -106,14 +112,15 @@ class EditItemPage extends StatelessWidget {
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red, 
+                        backgroundColor: Colors.red,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: Text('Cancelar',
-                                        style: TextStyle(color: Colors.white), 
-),
+                      child: Text(
+                        'Cancelar',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ],
                 ),
